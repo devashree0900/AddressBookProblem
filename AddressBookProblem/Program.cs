@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace AddressBookProblem
 {
@@ -6,8 +6,8 @@ namespace AddressBookProblem
     {
         public static void Main(string[] args)
         {
-            AddressBook obj = new AddressBook();
-            obj.AddressBookFunction();
+            AddressBookRecord obj = new AddressBookRecord();
+            obj.AddressBookRecordFunction(obj);
 
             
         }

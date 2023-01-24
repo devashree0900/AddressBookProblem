@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,21 @@ namespace AddressBookProblem
             this.zipcode = zipcode;
             this.phoneNumber = phoneNumber;
             this.email = email;
+        }
+
+        public void display(Contact contact)
+        {
+            Console.WriteLine("First Name: " + contact.firstName + " Last Name: " + contact.lastName + " Address: " + contact.address + " City: " + contact.city + " State: " + contact.state + " Zipcode: " + contact.zipcode + " Phone number: " + contact.phoneNumber + " Email: " + contact.email);
+        }
+
+        public string getCity(Contact contact)
+        {
+            return this.city;
+        }
+
+        public string getState(Contact contact)
+        {
+            return this.state;
         }
     }
 }

@@ -65,7 +65,7 @@ namespace AddressBookProblem
             int num;
             do
             {
-                Console.WriteLine("Enter 1 to Add New Contact, 2 to edit an existing contact and 3 to delete an existing contact, 4 to display all the contacts, 5 to display all contacts living in a city across all books, 6 to display all contacts living in a state across all books, 7 to count all persons by city name, 8 to count all persons by state name and 0 to exit");
+                Console.WriteLine("Enter 1 to Add New Contact, 2 to edit an existing contact and 3 to delete an existing contact, 4 to display all the contacts, 5 to display all contacts living in a city across all books, 6 to display all contacts living in a state across all books, 7 to count all persons by city name, 8 to count all persons by state name, 9 to sort by name, 10 to sort bu city, 11 to sort by state, 12 to sort by zip, 13  to perform binary serializarion, 14 for binary deserialization, 15 for json serialization, 16 for json deserialization, 17 for writing and reading from a csv file and 0 to exit");
                 num = Convert.ToInt32(Console.ReadLine());
                 if (num == 1) addContact(obj);
                 else if (num == 2) editContact(obj);
@@ -73,8 +73,18 @@ namespace AddressBookProblem
                 else if (num == 4) displayContact(obj);
                 else if (num == 5) SearchPersonByCity(obj);
                 else if (num == 6) SearchPersonByState(obj);
-                else if(num == 7) CountPersonByCity(obj);
-                else if(num == 8) CountPersonByState(obj) ;
+                else if (num == 7) CountPersonByCity(obj);
+                else if (num == 8) CountPersonByState(obj);
+                else if (num == 9) SortByName(obj);
+                else if (num == 10) SortByCity(obj);
+                else if (num == 11) SortByState(obj);
+                else if (num == 12) SortByZip(obj);
+                else if (num == 13) FileOperations.BinarySerialization(this);
+                else if (num == 14) FileOperations.BinaryDeserialization();
+                else if (num == 15) FileOperations.JSONSerialization(this);
+                else if (num == 16) FileOperations.JSONDeserialization();
+                else if (num == 17) FileOperations.WriteInToCSVFile(this);
+               
             }
             while (num != 0);
         }
@@ -95,7 +105,7 @@ namespace AddressBookProblem
                 //    }
                 //}
                
-                var result = rec.contactList.FindAll(x => x.getCity(x) == city);
+                var result = rec.contactList.FindAll(x => x.getCity() == city);
                 foreach (Contact con in result)
                 {
                     con.display(con);
@@ -111,7 +121,7 @@ namespace AddressBookProblem
             foreach (var rec in obj.records)
             {
 
-                var result = rec.contactList.Count(x => x.getCity(x) == city);
+                var result = rec.contactList.Count(x => x.getCity() == city);
                 Console.WriteLine("The number of records with city name " + city + " is : " + result);
 
             }
@@ -124,10 +134,50 @@ namespace AddressBookProblem
             foreach (var rec in obj.records)
             {
 
-                var result = rec.contactList.Count(x => x.getState(x) == state);
+                var result = rec.contactList.Count(x => x.getState() == state);
                 Console.WriteLine("The number of records with city name " + state + " is : " + result);
 
             }
+        }
+
+        public void SortByName(AddressBookRecord obj)
+        {
+            List<Contact> ListInAscOrderByName = contactList.OrderBy( Contact => Contact.getName()).ToList();
+            foreach(Contact c in ListInAscOrderByName)
+            {
+                c.display(c);
+            }
+            
+        }
+
+        public void SortByCity(AddressBookRecord obj)
+        {
+            List<Contact> ListInAscOrderByCity = contactList.OrderBy(Contact => Contact.getCity()).ToList();
+            foreach (Contact c in ListInAscOrderByCity)
+            {
+                c.display(c);
+            }
+
+        }
+
+        public void SortByState(AddressBookRecord obj)
+        {
+            List<Contact> ListInAscOrderByState = contactList.OrderBy(Contact => Contact.getState()).ToList();
+            foreach (Contact c in ListInAscOrderByState)
+            {
+                c.display(c);
+            }
+
+        }
+
+        public void SortByZip(AddressBookRecord obj)
+        {
+            List<Contact> ListInAscOrderByZip = contactList.OrderBy(Contact => Contact.getZip()).ToList();
+            foreach (Contact c in ListInAscOrderByZip)
+            {
+                c.display(c);
+            }
+
         }
         public void SearchPersonByState(AddressBookRecord obj)
         {
@@ -138,7 +188,7 @@ namespace AddressBookProblem
 
                 foreach (Contact val in rec.contactList)
                 {
-                    if (val.getState(val) == state)
+                    if (val.getState() == state)
                     {
 
                         val.display(val);

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AddressBookProblem
 {
+    [Serializable]
     public class Contact
     {
         private string firstName;
